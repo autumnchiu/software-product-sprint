@@ -7,3 +7,20 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+h1{
+    font-family: 'Kaushan Script',serif ;
+    font-size: 48px;
+}
+
+body{
+    font-family: 'Reenie Beanie', serif;
+}
+p,a{
+    font-size: 28px;
+}
+
+
+h2{
+    font-size: 32px;
+}
