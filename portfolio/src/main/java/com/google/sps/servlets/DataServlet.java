@@ -46,7 +46,7 @@ public class DataServlet extends HttpServlet {
     json += "\"" + comments.get(1) + "\"";
     json += ", ";
     json += "\"comment3\": ";
-    json += comments.get(2);
+   json += "\"" + comments.get(2) + "\"";
     json += "}";
     return json;
   }
