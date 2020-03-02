@@ -15,20 +15,40 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Arms for your chairs are just chairs for your arms.', 'I own chickens', 'sup and wassup', 'yeet'];
+// function addRandomGreeting() {
+//   const greetings =
+//       ['Arms for your chairs are just chairs for your arms.', 'I own chickens', 'sup and wassup', 'yeet'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+//   // Pick a random greeting.
+//   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+//   // Add it to the page.
+//   const greetingContainer = document.getElementById('greeting-container');
+//   greetingContainer.innerText = greeting;
+// }
+
+// function getHello() {
+//     fetch('/data').then(response => response.text()).then((greeting) => {
+//     document.getElementById('greeting-container').innerText = greeting;
+//   });
+// }
+
+function getComments() {
+    fetch('/data').then(response => repsonse.json()).then((comment) => {
+        const commentElement = document.getElementById('comment-container');
+        commentElement.innerHTML = '';
+        commentElement.appendChild(
+            createListElement('Comment: ' + comment.comment1));
+       commentElement.appendChild(
+            createListElement('Comment: ' + comment.comment2));     
+        commentElement.appendChild(
+            createListElement('Comment: ' + comment.comment3));    
+    });
 }
 
-function getHello() {
-    fetch('/data').then(response => response.text()).then((greeting) => {
-    document.getElementById('greeting-container').innerText = greeting;
-  });
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
