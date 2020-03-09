@@ -32,3 +32,15 @@ function createListElement(text) {
   liElement.innerText = text;
   return liElement;
 }
+
+function addRandomGreeting() {
+  const greetings =
+      ['Arms for your chairs are just chairs for your arms.', 'I own chickens', 'sup and wassup', 'yeet'];
+
+  // Pick a random greeting.
+  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+
+  // Add it to the page.
+  const greetingContainer = document.getElementById('greeting-container');
+  greetingContainer.innerText = greeting;
+}
