@@ -12,9 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
+
+function getComments() {
+    fetch('/data').then(response => response.json()).then((comment) => {
+        const commentElement = document.getElementById('comment-container');
+        commentElement.innerHTML = '';
+        commentElement.appendChild(
+            createListElement('Comment: ' + comment.comment1));
+       commentElement.appendChild(
+            createListElement('Comment: ' + comment.comment2));     
+        commentElement.appendChild(
+            createListElement('Comment: ' + comment.comment3));    
+    });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
 function addRandomGreeting() {
   const greetings =
       ['Arms for your chairs are just chairs for your arms.', 'I own chickens', 'sup and wassup', 'yeet'];
@@ -25,10 +43,4 @@ function addRandomGreeting() {
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
-}
-
-function getHello() {
-    fetch('/data').then(response => response.text()).then((greeting) => {
-    document.getElementById('greeting-container').innerText = greeting;
-  });
 }
