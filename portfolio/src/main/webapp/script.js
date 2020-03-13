@@ -14,16 +14,19 @@
 
 
 function getComments() {
-    fetch('/data').then(response => response.json()).then((comment) => {
-        const commentElement = document.getElementById('comment-container');
-        commentElement.innerHTML = '';
-        commentElement.appendChild(
-            createListElement('Comment: ' + comment.comment1));
-       commentElement.appendChild(
-            createListElement('Comment: ' + comment.comment2));     
-        commentElement.appendChild(
-            createListElement('Comment: ' + comment.comment3));    
-    });
+  fetch('/data').then(response => response.json()).then((messages) => {
+    
+    console.log(messages);
+
+    const commentList = document.getElementById('comment-container');
+    commentList.innerHTML = '';
+    for( let element in messages ){
+        var node = createListElement(messages[element]);
+        console.log(node);
+        commentList.appendChild(node);
+    }
+    
+  });
 }
 
 /** Creates an <li> element containing text. */

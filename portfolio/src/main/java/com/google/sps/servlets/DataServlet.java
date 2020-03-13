@@ -20,35 +20,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import com.google.gson.Gson;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+    private ArrayList<String> comments = new ArrayList<String>();
+    
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      ArrayList<String> comments = new ArrayList<String>();
-    comments.add("sup Autumn");
-    comments.add("What other projects have you done");
-    comments.add("hi");
-    String json = convertToJSON(comments);
     response.setContentType("application/json;");
+    String json = new Gson().toJson(comments);
+    
     response.getWriter().println(json);
   }
 
-  private String convertToJSON(ArrayList<String> comments){
-    String json = "{";
-    json += "\"comment1\": ";
-    json += "\"" + comments.get(0) + "\"";
-    json += ", ";
-    json += "\"comment2\": ";
-    json += "\"" + comments.get(1) + "\"";
-    json += ", ";
-    json += "\"comment3\": ";
-   json += "\"" + comments.get(2) + "\"";
-    json += "}";
-    return json;
+    @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String text = request.getParameter("text-input");
+    System.out.println(text);
+    comments.add(text);
+    System.out.println(comments);
+    response.sendRedirect("/");
+  }
+
+
+private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 
   
