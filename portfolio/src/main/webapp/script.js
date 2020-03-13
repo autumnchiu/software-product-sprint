@@ -47,3 +47,16 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/file-handler')
+      .then((response) => {
+        return response.text();
+      })
+      .then((imageUploadUrl) => {
+          console.log(imageUploadUrl);
+        const messageForm = document.getElementById('my-form');
+        messageForm.action = imageUploadUrl;
+        messageForm.classList.remove('hidden');
+      });
+}

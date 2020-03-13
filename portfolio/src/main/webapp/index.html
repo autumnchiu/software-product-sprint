@@ -7,20 +7,27 @@
    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Reenie+Beanie&display=swap" rel="stylesheet">
     <script src="script.js"></script>
   </head>
-  <body onload="getComments()">
+  <script type="text/javascript">
+    window.onload =  function(){
+        getComments();
+    fetchBlobstoreUrlAndShowForm();
+    };
+</script>
+
+  <body>
     <div id="content">
       <h1>Autumn's Portfolio</h1>
 
-    <form  action="/data" method="POST">
+    <form  action="/data" method="POST" id = "my-form" enctype="multipart/form-data">
 
       <p>Enter a comment:</p>
       <input name="text-input" type="text">
       <br/><br/>
-
+        <p>Upload an image:</p>
+      <input type="file" name="image">
+      <br/><br/>
       <input type="submit" value = "comment" />
     </form>
-
-      <!-- <button onclick="getComments()">Click to see comments</button> -->
       <div id = "comment-container"></div>
       <h2> About me! </h2>
       <p> 

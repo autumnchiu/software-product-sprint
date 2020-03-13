@@ -22,6 +22,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import java.io.PrintWriter;
+import com.google.appengine.api.blobstore.BlobInfo;
+import com.google.appengine.api.blobstore.BlobInfoFactory;
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
+import java.util.List;
+import java.util.Map;
+
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
@@ -33,7 +47,13 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     String json = new Gson().toJson(comments);
     
+    // Setting up uploading files
+
+    // Get the Blobstore URL
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+    String uploadUrl = blobstoreService.createUploadUrl("/file-handler");
     response.getWriter().println(json);
+    // response.getWriter().println(uploadUrl);
   }
 
     @Override
@@ -42,7 +62,7 @@ public class DataServlet extends HttpServlet {
     System.out.println(text);
     comments.add(text);
     System.out.println(comments);
-    response.sendRedirect("/");
+
   }
 
 
@@ -54,5 +74,4 @@ private String getParameter(HttpServletRequest request, String name, String defa
     return value;
   }
 
-  
 }
